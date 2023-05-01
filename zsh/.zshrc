@@ -69,7 +69,7 @@ ZSH_THEME="af-magic"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git npm jsontools osx pip urltools web-search z encode64 heroku node zsh-autosuggestions)
+plugins=(git jsontools macos z encode64 node zsh-syntax-highlighting zsh-autosuggestions ohmyzsh-full-autoupdate vscode)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -101,14 +101,12 @@ source $ZSH/oh-my-zsh.sh
 
 alias ls="ls -l"
 alias src="source ~/.zshrc"
-alias gmnc="git merge --no-commit"
 alias work="cd ~/documents/github"
-alias oh="vi ~/.zshrc"
 alias ip="ifconfig en0 | grep inet | grep -v inet6 | cut -d ' ' -f2"
-alias nc="netcat"
-alias mem="top -o mem"
-alias cpu="top -o cpu"
 alias gitignore="curl -o .gitignore http://gitignore.io/api/node,macos,jetbrains"
+alias y="yarn"
+alias cat="bat"
+alias pn="pnpm"
 
 lazygit () {
   git add .
@@ -116,39 +114,55 @@ lazygit () {
   git push --set-upstream origin $(git branch | grep \* | cut -d ' ' -f2)
 }
 
-gityank () {
-  git fetch --all
-  git reset --hard origin/master
-}
-
-gitfix () {
-  git rm -r --cached .
+lazyreset() {
   git add .
-}
-
-gitremote () {
-  git remote add origin "$1"
-  git pull origin master
-  git push --set-upstream origin master
-}
-
-gitdel () {
-  git branch --delete "$1"
-  git push origin --delete "$1"
+  git reset --hard
 }
 
 weather () {
   curl -S wttr.in/$1
 }
 
-dsdelete () {
-  find . -name '.DS_Store' -type f -delete
-}
-
 cls () {
   clear
 }
 
-export PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
-export PUPPETEER_EXECUTABLE_PATH=`which chromium`
+killport() {
+  pid=$(lsof -i tcp:"$1" | grep 'node' | grep 'LISTEN' | awk '{print $2}')
+
+  if [ -z "$pid" ] 
+    then return 0
+  fi
+
+  kill -9 "$pid"
+  print "Killed $pid running on $1"
+}
+
+# Exports
+
 export GIT_MERGE_AUTOEDIT=no
+export PATH=$PATH:~/.local/bin
+
+# Python
+export PATH="/Users/connorstevens/Library/Python/3.8.9/bin:$PATH"
+
+# Brew
+export PATH=/opt/homebrew/bin:$PATH
+export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
+
+export RPROMPT=""
+
+# Ruby
+export PATH="$PATH:$HOME/.rvm/bin"
+
+# Yarn
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+# pnpm
+export PNPM_HOME="/Users/connorstevens/Library/pnpm"
+export PATH="$PNPM_HOME:$PATH"
+# pnpm end
+
+# go
+export GOPATH="/Users/connorstevens/go"
+export PATH="$GOPATH/bin:$PATH"

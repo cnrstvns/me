@@ -1,0 +1,64 @@
+{
+  "editor.inlineSuggest.enabled": true,
+  "editor.accessibilitySupport": "off",
+  "explorer.confirmDragAndDrop": false,
+  "editor.linkedEditing": true,
+  "files.autoSave": "onFocusChange",
+  "terminal.integrated.fontFamily": "Menlo, Monaco, 'Courier New', monospace",
+  "editor.tabSize": 2,
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
+  ],
+  "editor.fontLigatures": true,
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "workbench.startupEditor": "none",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.fontSize": 14,
+  "explorer.confirmDelete": false,
+  "eslint.format.enable": true,
+  "eslint.lintTask.enable": true,
+  "eslint.codeActionsOnSave.rules": null,
+  "eslint.alwaysShowStatus": true,
+  "auto-close-tag.activationOnLanguage": [
+    "xml",
+    "php",
+    "blade",
+    "ejs",
+    "jinja",
+    "javascriptreact",
+    "typescriptreact",
+    "plaintext",
+    "markdown",
+    "vue",
+    "liquid",
+    "erb",
+    "lang-cfml",
+    "cfml",
+    "HTML (EEx)",
+    "HTML (Eex)",
+    "plist"
+  ],
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "githubPullRequests.pullBranch": "never",
+  "editor.formatOnSave": true,
+  "workbench.colorTheme": "One Dark Pro Vivid",
+  "workbench.iconTheme": "material-icon-theme",
+  "window.commandCenter": true,
+  "codeQL.telemetry.enableTelemetry": false,
+  "[prisma]": {
+    "editor.defaultFormatter": "Prisma.prisma"
+  },
+  "[python]": {
+    "editor.formatOnType": true
+  },
+  "inline-parameters.fontStyle": "normal",
+  "inline-parameters.padding": "0.2em 0.2em",
+  "inline-parameters.margin": "0.1em",
+  "javascript.inlayHints.variableTypes.suppressWhenTypeMatchesName": false
+}
