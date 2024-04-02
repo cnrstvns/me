@@ -130,7 +130,7 @@ cls () {
 killport() {
   pid=$(lsof -i tcp:"$1" | grep 'node' | grep 'LISTEN' | awk '{print $2}')
 
-  if [ -z "$pid" ] 
+  if [ -z "$pid" ]
     then return 0
   fi
 
@@ -139,30 +139,24 @@ killport() {
 }
 
 # Exports
-
 export GIT_MERGE_AUTOEDIT=no
 export PATH=$PATH:~/.local/bin
-
-# Python
-export PATH="/Users/connorstevens/Library/Python/3.8.9/bin:$PATH"
+export RPROMPT=""
 
 # Brew
 export PATH=/opt/homebrew/bin:$PATH
 export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
 
-export RPROMPT=""
-
 # Ruby
 export PATH="$PATH:$HOME/.rvm/bin"
-
-# Yarn
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
 # pnpm
 export PNPM_HOME="/Users/connorstevens/Library/pnpm"
 export PATH="$PNPM_HOME:$PATH"
 # pnpm end
 
-# go
-export GOPATH="/Users/connorstevens/go"
-export PATH="$GOPATH/bin:$PATH"
+source /opt/homebrew/opt/chruby/share/chruby/auto.sh
+source /opt/homebrew/opt/chruby/share/chruby/chruby.sh
+source /opt/homebrew/opt/chruby/share/chruby/chruby.sh
+source /opt/homebrew/opt/chruby/share/chruby/auto.sh
+chruby ruby-3.3.0
