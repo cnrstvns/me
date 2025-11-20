@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/connorstevens/.oh-my-zsh"
+export ZSH="/Users/connor/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -69,7 +69,7 @@ ZSH_THEME="af-magic"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git jsontools macos z encode64 node zsh-syntax-highlighting zsh-autosuggestions ohmyzsh-full-autoupdate vscode)
+plugins=(git jsontools macos z encode64 node zsh-syntax-highlighting zsh-autosuggestions ohmyzsh-full-autoupdate vscode hacker-quotes pnpm)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -104,9 +104,10 @@ alias src="source ~/.zshrc"
 alias work="cd ~/documents/github"
 alias ip="ifconfig en0 | grep inet | grep -v inet6 | cut -d ' ' -f2"
 alias gitignore="curl -o .gitignore http://gitignore.io/api/node,macos,jetbrains"
-alias y="yarn"
 alias cat="bat"
 alias pn="pnpm"
+alias r="rails"
+alias tf="terraform"
 
 lazygit () {
   git add .
@@ -138,6 +139,17 @@ killport() {
   print "Killed $pid running on $1"
 }
 
+fixzsh() {
+  sed -i '' '/^[^:]/d' ~/.zsh_history
+  awk '!seen[$0]++' ~/.zsh_history > ~/.zsh_history.tmp && mv ~/.zsh_history.tmp ~/.zsh_history
+  fc -R ~/.zsh_history
+  src
+}
+
+tc () {
+  pnpm tsc --noEmit
+}
+
 # Exports
 export GIT_MERGE_AUTOEDIT=no
 export PATH=$PATH:~/.local/bin
@@ -147,16 +159,39 @@ export RPROMPT=""
 export PATH=/opt/homebrew/bin:$PATH
 export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
 
-# Ruby
-export PATH="$PATH:$HOME/.rvm/bin"
-
 # pnpm
 export PNPM_HOME="/Users/connorstevens/Library/pnpm"
 export PATH="$PNPM_HOME:$PATH"
 # pnpm end
 
-source /opt/homebrew/opt/chruby/share/chruby/auto.sh
-source /opt/homebrew/opt/chruby/share/chruby/chruby.sh
-source /opt/homebrew/opt/chruby/share/chruby/chruby.sh
-source /opt/homebrew/opt/chruby/share/chruby/auto.sh
-chruby ruby-3.3.0
+export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/opt/homebrew/share/zsh-syntax-highlighting/highlighters
+source /Users/connor/documents/github/me/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# Go
+export PATH=$PATH:/usr/local/go/bin
+export PATH=$PATH:~/go/bin
+
+# mySQL
+export PATH=$PATH:/usr/local/mysql/bin
+
+export NVM_DIR="$HOME/.nvm"
+
+export PATH="/opt/homebrew/opt/pnpm@9/bin:$PATH"
+
+eval "$(mise activate zsh)"
+
+export LDFLAGS="-L/opt/homebrew/opt/libpq/lib"
+export CPPFLAGS="-I/opt/homebrew/opt/libpq/include"
+export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
+export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
+
+export PATH=$PATH:/Users/connor/.spicetify
+export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
+export PGGSSENCMODE=disable
+
+export AWS_CA_BUNDLE=/etc/ssl/cert.pem
+
